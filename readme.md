@@ -28,7 +28,7 @@ java -cp out Main [strategy]
 
 ## Approaches
 
-There are two main strategies implemented in this application: `MAP_ONLY` and `MAP_AND_HEAP`. We'll use n as the number of unique votes in the file and m as the number of unique candidates. n is always greater than or equal to m.
+There are two main strategies implemented in this application: `MAP_ONLY` and `MAP_AND_HEAP`. We'll use `n` as the number of unique votes in the file and `m` as the number of unique candidates to analyse time and space complexities. n is always greater than or equal to m.
 
 ### 1. Map Only (`MAP_ONLY`)
 
@@ -37,12 +37,12 @@ In this approach, votes are stored in a map where the key is the candidate ID an
 **Pros**:
 
 - Simplicity: Easy to understand and implement.
-- Efficient Memory Usage: No additional structures are needed other than the map. Space complexity is O(m).
-- Efficient Insertion: Insertion is faster. Time complexity is O(1).
+- Efficient Memory Usage: No additional structures are needed other than the map. Space complexity is `O(m)`.
+- Efficient Insertion: Insertion is faster. Time complexity is `O(1)`.
 
 **Cons**:
 
-- Slower Retrieval: To get the top 3 candidates, the map needs to be sorted, which can be relatively slower; O(mlog(m)).
+- Slower Retrieval: To get the top 3 candidates, the map needs to be sorted, which can be relatively slower; `O(mlog(m))`.
 
 ### 2. Map and Heap (`MAP_AND_HEAP`)
 
@@ -50,23 +50,23 @@ In this strategy, along with the map, a max heap (priority queue) is maintained 
 
 **Pros**:
 
-- Faster Retrieval: Allows for efficient retrieval of top 3 candidates without sorting; O(log(n)).
+- Faster Retrieval: Allows for efficient retrieval of top 3 candidates without sorting; `O(log(n))`.
   
 **Cons**:
 
 - Complexity: Additional structure and synchronization between map and heap.
-- Memory Overhead: Extra storage is needed for the heap. The heap size will be O(n) and the map size will be O(m). Resulting in a total space complexity of O(n).
-- Slower Insertion: Insertion is slower since we add elements to the heap and cause a rebanlance. Time complexity is O(log(n)).
+- Memory Overhead: Extra storage is needed for the heap. The heap size will be `O(n)` and the map size will be `O(m)`. Resulting in a total space complexity of `O(n)`.
+- Slower Insertion: Insertion is slower since we add elements to the heap and cause a re-balancing. Time complexity is `O(log(n))`.
 
 #### To Summarize
 
-The `MAP_ONLY` approach has a time complexity for insertion of O(1) and O(mlog(m)) for retrieval. It also has a space complexity of O(m).
+The `MAP_ONLY` approach has a time complexity for insertion of `O(1)` and `O(mlog(m))` for retrieval. It also has a space complexity of `O(m)`.
 
-The `MAP_AND_HEAP` approach has a time complexity for insertion of O(log(n)) and O(log(n)) for retrieval. It also has a space complexity of O(n).
+The `MAP_AND_HEAP` approach has a time complexity for insertion of `O(log(n))` and `O(log(n))` for retrieval. It also has a space complexity of `O(n)`.
 
 ## Why Implement Both?
 
-Different scenarios may benefit from different strategies. The `MAP_ONLY` approach would be more efficient overall if the number of insertions vastly outnumbers the times the user asks for the top 3 candidates. This is because each insertion is quick, it only requires to update a count in a hashmap. However, retrieval of the top 3 candidates would require sorting the entries, which can be costly if done frequently. On the other hand, the `MAP_AND_HEAP` strategy is more efficient when the user frequently queries for the top candidates. By maintaining a max-heap, this strategy allows for faster retrieval of the top candidates, at the expense of slightly slower insertions due to the need to maintain the heap's order. Additionally, the `MAP_AND_HEAP` approach incurs a higher memory overhead because of maintaining both a map and a heap containing all the votes. So, if space is a premium concern, then the `MAP_ONLY` approach would be the more efficient choice. In conclusion, the best strategy largely depends on the specific requirements and constraints of the use case at hand.
+Different scenarios may benefit from different strategies. The `MAP_ONLY` approach would be more efficient overall if the number of insertions vastly outnumbers the times the user asks for the top 3 candidates. This is because each insertion is quick, it only requires to update a count in a hashmap. It would also be more efficient if the number of unique candidates is much smaller than the number of votes. However, retrieval of the top 3 candidates would require sorting the candidates, which can be costly if done frequently. On the other hand, the `MAP_AND_HEAP` strategy is more efficient when the user frequently queries for the top candidates and if the difference between the number of candidates and votes is small. By maintaining a max-heap, this strategy allows for faster retrieval of the top candidates, at the expense of slightly slower insertions due to the need to maintain the heap's order. Additionally, the `MAP_AND_HEAP` approach incurs a higher memory overhead because of maintaining both a map and a heap containing all the votes. So, if space is a premium concern, then the `MAP_ONLY` approach would be the more efficient choice. In conclusion, the best strategy largely depends on the specific requirements and constraints of the use case at hand.
 
 ## Interacting with the Application
 
