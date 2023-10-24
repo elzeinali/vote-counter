@@ -24,6 +24,7 @@ public class VoteFileReader extends Observable<VoteEntry> implements Runnable {
     @Override
     public void run() {
         readFile();
+        System.out.println("Finished reading file. Now watching for changes...");
 
         try (WatchService watchService = FileSystems.getDefault().newWatchService()) {
             path.getParent().register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
@@ -32,7 +33,9 @@ public class VoteFileReader extends Observable<VoteEntry> implements Runnable {
                 WatchKey key = watchService.take();
                 for (WatchEvent<?> event : key.pollEvents()) {
                     if (event.kind() == StandardWatchEventKinds.ENTRY_MODIFY) {
+                        System.out.println("Changes detected. Reading new again...");
                         readFile();
+                        System.out.println("Finished reading file. Now watching for changes...");
                     }
                 }
                 key.reset();
