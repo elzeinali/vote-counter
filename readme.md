@@ -38,7 +38,6 @@ In this approach, votes are stored in a map where the key is the candidate ID an
 
 **Pros**:
 
-- Simplicity: Easy to understand and implement.
 - Efficient Memory Usage: No additional structures are needed other than the map. Space complexity is `O(m)`.
 - Efficient Insertion: Insertion is faster. Time complexity is `O(1)`.
 
@@ -56,7 +55,6 @@ In this strategy, along with the map, a max heap (priority queue) is maintained 
   
 **Cons**:
 
-- Complexity: Additional structure and synchronization between map and heap.
 - Memory Overhead: Extra storage is needed for the heap. The heap size will be `O(n)` and the map size will be `O(m)`. Resulting in a total space complexity of `O(n)`.
 - Slower Insertion: Insertion is slower since we add elements to the heap and cause a re-balancing. Time complexity is `O(log(n))`.
 
