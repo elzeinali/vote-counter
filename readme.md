@@ -30,7 +30,7 @@ java -cp out Main [strategy]
 
 ## Approaches
 
-There are two main strategies implemented in this application: `MAP_ONLY` and `MAP_AND_HEAP`. We'll use `n` as the number of unique votes in the file and `m` as the number of unique candidates to analyse time and space complexities. n is always greater than or equal to m.
+There are two main strategies implemented in this application: `MAP_ONLY` and `MAP_AND_HEAP`. We'll use `n` as the number of unique votes in the file and `m` as the number of unique candidates to analyse time and space complexities. `n` is always greater than or equal to `m`.
 
 ### 1. Map Only (`MAP_ONLY`)
 
