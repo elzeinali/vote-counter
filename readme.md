@@ -12,7 +12,9 @@ Ensure you have `Java` installed on your machine. You can verify this by running
 
 Navigate to the root directory of the project (`vote-counter`). To compile all the Java files and place the compiled `.class` files in the `out` directory, run:
 
-```javac -d out src/*.java src/*/*.java```
+``` bash
+javac -d out src/*.java src/*/*.java
+```
 
 ### Execution
 
